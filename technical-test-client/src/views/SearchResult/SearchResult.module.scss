@@ -1,0 +1,238 @@
+$color-hover-background: rgb(210, 208, 208);
+$color-text: #666666;
+$color-border: #EEEEEE;
+
+@mixin respond-to($media) {
+    @if $media =='mobile' {
+        @media (min-width: 530px) and (max-width: 768px) {
+            @content;
+        }
+    }
+
+    @if $media =='mobilebig' {
+        @media (min-width: 768px) and (max-width: 1024px) {
+            @content;
+        }
+    }
+
+    @if $media =='tablet' {
+        @media (min-width: 1024px) and (max-width: 1400px) {
+            @content;
+        }
+    }
+
+    @if $media =='big' {
+        @media (min-width: 1400px) {
+            @content;
+        }
+    }
+}
+
+%base-container {
+    padding: 0;
+    width: 100%;
+    display: grid;
+}
+
+%base-text {
+    flex-wrap: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.resultList {
+    @extend %base-container;
+    margin: 0;
+    list-style-type: none;
+    grid-template-columns: 100%;
+    grid-template-rows: 25% 25% 25% 25%;
+    color: $color-text;
+    padding: 0 2%;
+    width: 96%;
+}
+
+.resultItemCard {
+    border-bottom: 1px solid $color-border;
+    cursor: pointer;
+
+    &:hover {
+        background-color: darken($color-hover-background, 10%);
+    }
+}
+
+.resultCard {
+    @extend %base-container;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 20% 60% 20%;
+    grid-template-areas: "img price" "img description" ". condition";
+    height: 200px;
+}
+
+.resultImage {
+    border-radius: 4px;
+    margin: auto;
+    width: 100%;
+    grid-area: img;
+}
+
+.resultPrice {
+    display: flex;
+    grid-area: price;
+
+    h2 {
+        margin: auto 0 0 0;
+    }
+}
+
+.resultFreeShipping {
+    width: 20px;
+    height: 20px;
+    margin: auto 0 0.5% 2%;
+}
+
+.resultDescription {
+    @extend %base-text;
+    grid-area: description;
+    margin: 0;
+    padding: 4% 5% 4% 0;
+    font-size: 18px;
+}
+
+.resultCondition {
+    @extend %base-text;
+    grid-area: condition;
+    margin: 0 0 auto;
+    padding: 0 5% 0 0;
+    white-space: nowrap;
+    font-size: 12px;
+    width: 100%;
+    max-width: 100%;
+    display: block;
+}
+
+.resultEmpty {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.6;
+
+    p {
+        text-align: center;
+    }
+}
+
+@include respond-to('mobile') {
+    .resultCard {
+        grid-template-columns: 40% 60%;
+        grid-template-rows: 30% 40% 30%;
+    }
+
+    .resultDescription {
+        padding: 2% 0;
+        font-size: 18px;
+    }
+
+    .resultCondition {
+        padding: 2% 0px;
+        font-size: 12px;
+    }
+
+    .resultImage {
+        height: 180px;
+        width: 180px;
+    }
+}
+
+@include respond-to('mobilebig') {
+    .resultCard {
+        grid-template-columns: 30% 70%;
+        grid-template-rows: 30% 40% 30%;
+    }
+
+    .resultDescription {
+        padding: 1% 5% 0 0;
+        font-size: 18px;
+    }
+
+    .resultCondition {
+        padding: 1% 5% 0 0;
+        font-size: 12px;
+    }
+
+    .resultPrice {
+        h1 {
+            margin: auto 0 auto 0;
+        }
+    }
+
+    .resultImage {
+        height: 180px;
+        width: 180px;
+    }
+}
+
+@include respond-to('tablet') {
+    .resultCard {
+        grid-template-columns: 30% 50% 20%;
+        grid-template-rows: 30% 70%;
+        grid-template-areas: "img price condition" "img description condition";
+    }
+
+    .resultDescription {
+        padding: 5% 5% 0 0;
+        font-size: 18px;
+    }
+
+    .resultCondition {
+        margin: 15% auto 0 0;
+        padding: 0;
+        font-size: 12px;
+    }
+
+    .resultPrice {
+        h1 {
+            margin: auto 0 0 0;
+        }
+    }
+
+    .resultImage {
+        height: 100%;
+        width: auto;
+    }
+}
+
+@include respond-to('big') {
+
+    .resultCard {
+        grid-template-columns: 15% 60% 25%;
+        grid-template-rows: 30% 70%;
+        grid-template-areas: "img price condition" "img description condition";
+    }
+
+    .resultItemCard {
+        height: 212px;
+    }
+
+    .resultDescription {
+        padding: 32px 5% 0 0;
+        font-size: 18px;
+    }
+
+    .resultCondition {
+        margin: 15% auto 0 auto;
+        padding: 0;
+        font-size: 12px;
+    }
+
+    .resultPrice {
+        h1 {
+            margin: auto 0 0 0;
+        }
+    }
+
+    .resultImage {
+        padding: 16px;
+        height: 180px;
+        width: 180px;
+    }
+}

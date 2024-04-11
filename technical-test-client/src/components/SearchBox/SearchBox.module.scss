@@ -1,0 +1,142 @@
+$color-background-searchbar: #FFE600;
+$color-shadow-searchbar: rgba(0, 0, 0, 0.1);
+$color-border: #EEEEEE;
+$color-button-background: #EEEEEE;
+$color-button-text: #faf8f8;
+$color-button-hover-background: #999999;
+$max-width-searchinput: 70%;
+$max-width-searchinput-mobile: 60%;
+
+@mixin respond-to($media) {
+  @if $media =='mobile' {
+    @media (min-width: 620px) and (max-width: 768px) {
+      @content;
+    }
+  }
+
+  @if $media =='tablet' {
+    @media (min-width: 768px) and (max-width: 1400px) {
+      @content;
+    }
+  }
+
+  @if $media =='big' {
+    @media (min-width: 1400px) {
+      @content;
+    }
+  }
+}
+
+%base {
+  padding: 0.5rem;
+  border: 1px solid $color-border;
+  height: 40px;
+  margin: auto 0;
+}
+
+.searchBar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: $color-background-searchbar;
+  box-shadow: 0 2px 5px $color-shadow-searchbar;
+  z-index: 1000;
+
+  .searchForm {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem;
+
+    .searchImage {
+      margin-right: 2%;
+      padding: 0;
+    }
+
+    .searchInput {
+      @extend %base;
+      width: 100%;
+      max-width: $max-width-searchinput;
+      border-right: none;
+      border-radius: 2px 0 0 2px;
+      font-size: 18px;
+
+      &:focus {
+        outline: none;
+        border-color: #dfe1e2;
+      }
+
+      &::placeholder {
+        font-size: 14px;
+      }
+    }
+
+    .searchButton {
+      @extend %base;
+      background: $color-button-background;
+      color: $color-button-text;
+      text-align: center;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+
+      &:hover {
+        background-color: darken($color-button-hover-background, 10%);
+      }
+
+      i {
+        margin: 0;
+      }
+    }
+
+    .searchIcon {
+      padding: 0px;
+      margin: 0;
+    }
+
+    @include respond-to('mobile') {
+      align-items: stretch;
+
+      .searchInput {
+        max-width: $max-width-searchinput-mobile;
+
+        ::placeholder {
+          font-size: 15px;
+        }
+      }
+
+      .searchButton {
+        border-top: none;
+      }
+
+      .searchIcon {
+        margin: 0;
+      }
+    }
+
+    @include respond-to('tablet') {
+      .searchInput::placeholder {
+        font-size: 15px;
+      }
+
+      .searchIcon {
+        padding: 0 10px;
+      }
+
+      .searchInput,
+      .searchButton {
+        height: 50px;
+      }
+    }
+
+    @include respond-to('big') {
+      .searchInput::placeholder {
+        font-size: 17px;
+      }
+
+      .searchInput,
+      .searchButton {
+        height: 50px;
+      }
+    }
+  }
+}

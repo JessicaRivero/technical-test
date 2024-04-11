@@ -1,0 +1,35 @@
+$color-background-body: #dfe1e2;
+$color-background-content: #fff;
+
+@mixin respond-to($media) {
+    @if $media =='big' {
+        @media (min-width: 1400px) {
+            @content;
+        }
+    }
+}
+
+.productBody {
+    position: fixed;
+    top: 0;
+    left: 0;
+    max-height: 100vh;
+    overflow-y: auto;
+    width: 100vw;
+    height: 100%;
+    background: $color-background-body;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.productContent {
+    background: $color-background-content;
+    width: 85%;
+    margin: 0.3rem auto 2rem auto;
+    border-radius: 5px;
+
+    @include respond-to('big') {
+        width: 80%;
+    }
+}

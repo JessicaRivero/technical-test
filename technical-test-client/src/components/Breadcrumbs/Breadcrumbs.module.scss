@@ -1,0 +1,28 @@
+$color-text-breadcrums: #666666;
+
+.productContentBreadcrumbs {
+  width: 100%;
+}
+
+.productBreadcrumbs {
+  display: flex;
+  list-style-type: none;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
+  padding: 1rem 0;
+  color: $color-text-breadcrums;
+  flex-wrap: wrap;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.productItemBreadcrumbs {
+  font-size: 14px;
+
+  &:not(:last-child)::after {
+    content: " > ";
+    padding: 0 3px;
+  }
+}
